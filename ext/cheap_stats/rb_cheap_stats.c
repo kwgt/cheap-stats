@@ -509,4 +509,5 @@ Init_cheap_stats()
   rb_define_method(klass, "pearson_skewness",rb_cheap_stats_pearson_skewness,0);
 
   rb_alias(klass, rb_intern("average"), rb_intern("mean"));
+  rb_alias(klass, rb_intern("sigma"), rb_intern("std"));
 }
