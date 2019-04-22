@@ -39,7 +39,7 @@ combsort11(double* a, size_t n)
 
     if (h == 9 || h == 10) h = 11;
 
-    for (i = 0; i < (n - h); i++) {
+    for (i = 0; i < ((int)n - h); i++) {
       if (a[i] > a[i + h]) {
         SWAP(a[i], a[i + h]);
         f = !0;
@@ -87,7 +87,7 @@ calc_sum(double* a, size_t n)
 
   s = 0;
 
-  for (i = 0; i < n; i++) {
+  for (i = 0; i < (int)n; i++) {
     s += a[i];
   }
 
@@ -104,7 +104,7 @@ calc_variance(double* a, size_t n, double mean)
 
   s = 0;
 
-  for (i = 0; i < n; i++) {
+  for (i = 0; i < (int)n; i++) {
     d  = a[i] - mean; 
     s += (d * d);
   }
@@ -132,7 +132,7 @@ calc_moment(double* a, size_t n, double k)
   double s;
   int i;
 
-  for (i = 0; i < n; i++) {
+  for (i = 0; i < (int)n; i++) {
     s += pow(a[i], k);
   }
 
@@ -145,7 +145,7 @@ calc_central_moment(double* a, size_t n, double k, double mean)
   double s;
   int i;
 
-  for (i = 0; i < n; i++) {
+  for (i = 0; i < (int)n; i++) {
     s += pow(a[i] - mean, k);
   }
 
@@ -187,7 +187,7 @@ calc_kde(double* a, size_t n, double sig, double v)
   h = (0.9 * sig) / pow(n, 1.0 / 5.0);
   s = 0.0;
 
-  for (i = 0; i < n; i++) {
+  for (i = 0; i < (int)n; i++) {
     s += kernel_gaussian((v - a[i]) / h);
   }
 
