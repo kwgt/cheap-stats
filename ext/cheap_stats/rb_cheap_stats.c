@@ -484,6 +484,37 @@ rb_cheap_stats_pearson_skewness(VALUE self)
   return DBL2NUM(ret);
 }
 
+/**
+ * calc Z-score
+ *
+ * @param [Numeric] v   target value
+ *
+ * @return [Float] skewness value
+ */
+static VALUE
+rb_cheap_stats_z_score(VALUE self, VALUE v)
+{
+  rb_cheap_stats_t* ptr;
+  int err;
+  double ret;
+
+  /*
+   * strip context data
+   */
+  TypedData_Get_Struct(self, rb_cheap_stats_t, &rb_cheap_stats_data_type, ptr);
+
+  /*
+   * check argument
+   */
+  err = cheap_stats_z_score(ptr->stats, rb_num2dbl(v), &ret);
+  if (err) {
+    RUNTIME_ERROR("cheap_stats_z_score() failed [err=%d]", err);
+  }
+
+  return DBL2NUM(ret);
+}
+
+
 void
 Init_cheap_stats()
 {
@@ -507,6 +538,7 @@ Init_cheap_stats()
   rb_define_method(klass, "std_moment", rb_cheap_stats_std_moment, 1);
   rb_define_method(klass, "skewness", rb_cheap_stats_skewness, 0);
   rb_define_method(klass, "pearson_skewness",rb_cheap_stats_pearson_skewness,0);
+  rb_define_method(klass, "z_score",rb_cheap_stats_z_score, 1);
 
   rb_alias(klass, rb_intern("average"), rb_intern("mean"));
   rb_alias(klass, rb_intern("sigma"), rb_intern("std"));

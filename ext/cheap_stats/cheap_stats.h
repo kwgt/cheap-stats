@@ -33,5 +33,6 @@ int cheap_stats_central_moment(cheap_stats_t* obj, double k, double* dst);
 int cheap_stats_std_moment(cheap_stats_t* obj, double k, double* dst);
 int cheap_stats_skewness(cheap_stats_t* obj, double* dst);
 int cheap_stats_pearson_skewness(cheap_stats_t* obj, double* dst);
+int cheap_stats_z_score(cheap_stats_t* obj, double v, double* res);
 
 #endif /* !defined(__SMALL_STATS_H__) */

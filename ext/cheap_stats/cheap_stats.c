@@ -603,3 +603,37 @@ cheap_stats_pearson_skewness(cheap_stats_t* ptr, double* dst)
   return ret;
 }
 
+int
+cheap_stats_z_score(cheap_stats_t* ptr, double v, double* dst)
+{
+  int ret;
+
+  /*
+   * initialize
+   */
+  ret = 0;
+
+  /*
+   * argument check
+   */
+  do {
+    if (ptr == NULL) {
+      ret = DEFAULT_ERROR;
+      break;
+    }
+
+    if (dst == NULL) {
+      ret = DEFAULT_ERROR;
+      break;
+    }
+  } while (0);
+
+  /*
+   * do test (by Smirnov-Grubbs test)
+   */
+  if (!ret) {
+    *dst = (v - ptr->mean) / ptr->std;
+  }
+
+  return ret;
+}
